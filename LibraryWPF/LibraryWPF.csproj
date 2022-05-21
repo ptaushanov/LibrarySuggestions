@@ -65,6 +65,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAL\AuthorService.cs" />
+    <Compile Include="DAL\ServiceRegistry.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Utils\EnterSuggestion.cs" />
     <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="ViewModels\AddAuthorVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
@@ -125,7 +129,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

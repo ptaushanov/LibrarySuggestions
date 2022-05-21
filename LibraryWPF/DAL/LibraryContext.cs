@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryWPF.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace LibraryWPF.DAL
 {
-    internal class LibraryContext : DbContext
+    public class LibraryContext : DbContext
     {
-        // TODO add DBSet<???>
-        public LibraryContext() : base() { }
+        public DbSet<Author> Authors { get; set; }
+        public LibraryContext() : base(Properties.Settings.Default.DbConnect) { }
     }
 }
