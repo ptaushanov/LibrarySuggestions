@@ -37,7 +37,6 @@ namespace LibraryWPF.Models
 
         public void Copy(Author newAuthor)
         {
-            AuthorId = newAuthor.AuthorId;
             Title = newAuthor.Title;
             Category = newAuthor.Category;
             FirstName = newAuthor.FirstName;

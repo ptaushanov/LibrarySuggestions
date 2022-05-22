@@ -22,6 +22,7 @@ namespace LibraryWPF.ViewModels
         private Author _selectedAuthor;
 
         public RelayCommand SaveSuggestionCommand { get; private set; }
+        public RelayCommand EditSuggestionCommand { get; private set; }
         public RelayCommand DeselectCommand { get; private set; }
 
         public ObservableCollection<string> Categories { get; set; }
@@ -36,6 +37,7 @@ namespace LibraryWPF.ViewModels
             Suggestions = new ObservableCollection<Author>();
             SaveSuggestionCommand = new RelayCommand(SaveSuggestion);
             DeselectCommand = new RelayCommand(Deselect);
+            EditSuggestionCommand = new RelayCommand(EditSuggestion);
             SelectedAuthor = null;
         }
 
@@ -180,6 +182,9 @@ namespace LibraryWPF.ViewModels
             Publisher = "";
             SelectedAuthor = null;
             Suggestions.Clear();
+
+            PropChanged("AddEnabled");
+            PropChanged("EditEnabled");
         }
     }
 

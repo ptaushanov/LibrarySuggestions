@@ -180,7 +180,7 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Content="Редактирай"
-                    Command="{Binding SaveSuggestionCommand}"
+                    Command="{Binding EditSuggestionCommand}"
                     Margin="10"
                     Visibility="{Binding EditEnabled, Converter={StaticResource BooleanToVisibility}}"
                 />
