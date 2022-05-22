@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LibraryWPF.Views"
         xmlns:vm ="clr-namespace:LibraryWPF.ViewModels" 
         mc:Ignorable="d"
-        Title="AddAuthorView" Height="450" Width="800"
+        Title="AddAuthorView" Height="500" Width="900"
         ResizeMode="CanMinimize">
     <Window.DataContext>
         <vm:AddAuthorVM/>
@@ -200,27 +200,17 @@
             </StackPanel>
         </Grid>
 
-        <ListBox 
+        <DataGrid 
             Grid.Row="1"
             Grid.Column="1"
-            Width="300"
+            Width="400"
             Height="200"
+            Margin="10 -40 10 10"
             BorderThickness="2"
             BorderBrush="Black"
             ItemsSource="{Binding Suggestions}"
             SelectedItem="{Binding SelectedAuthor}"
-        >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Title, StringFormat=Заглавие: {0}}" />
-                        <TextBlock Text="{Binding Category, StringFormat=Категория: {0}}" />
-                        <TextBlock Text="{Binding FirstName, StringFormat=Име: {0}}" />
-                        <TextBlock Text="{Binding LastName, StringFormat=Фамилия: {0}}" />
-                        <TextBlock Text="{Binding Publisher, StringFormat=Издател: {0}}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        />
+
     </Grid>
 </Window>
