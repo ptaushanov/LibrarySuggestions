@@ -18,7 +18,7 @@ namespace LibraryWPF.DAL
             _libraryContext.SaveChanges();
         }
 
-        public static IEnumerable<T> FindLastFive<T>(string searchProperty, T searchTerm)
+        public static IEnumerable<Author> FindLastFive<T>(string searchProperty, T searchTerm)
         {
             string stringifiedSearchTerm = searchTerm.ToString();
 
@@ -34,15 +34,8 @@ namespace LibraryWPF.DAL
                         .GetProperty(searchProperty)
                         .GetValue(author);
 
-                    return value == null ? false :
-                    ((string)value).Contains(stringifiedSearchTerm);
+                    return value != null && ((string)value).Contains(stringifiedSearchTerm);
                 })
-                .Select(author =>
-                    author
-                        .GetType()
-                        .GetProperty(searchProperty)
-                        .GetValue(author))
-                .Cast<T>()
                 .ToList();
         }
     }

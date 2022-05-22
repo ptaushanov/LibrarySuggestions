@@ -9,11 +9,11 @@ using LibraryWPF.Models;
 
 namespace LibraryWPF.Utils
 {
-    public class EnterSuggestion
+    public class EnterSuggestion<T>
     {
         private static PropertyInfo _inputProperty;
 
-        private static ObservableCollection<string> _suggestions;
+        private static ObservableCollection<T> _suggestions;
 
         public static void SaveSuggestion(object model)
         {
@@ -36,7 +36,7 @@ namespace LibraryWPF.Utils
             ServiceRegistry.Add(model);
         }
 
-        public static void Suggest(object targetVM, string modelType)
+        public static void Suggest(object targetVM)
         {
             string searchProperty = _inputProperty.Name;
 
@@ -44,7 +44,11 @@ namespace LibraryWPF.Utils
             _suggestions.Clear();
 
             if (searchTerm.Equals(string.Empty)) { return; }
-            IEnumerable<string> suggestions = ServiceRegistry.FindLastFive(modelType, searchProperty, searchTerm);
+
+            IEnumerable<T> suggestions =
+                ServiceRegistry
+                .FindLastFive(typeof(T).Name, searchProperty, searchTerm)
+                .Cast<T>();
 
             suggestions
                 .ToList()
@@ -52,7 +56,7 @@ namespace LibraryWPF.Utils
         }
 
         public static void SwitchContext(object targetVM, string inputPropertyName,
-            ObservableCollection<string> sugestions)
+            ObservableCollection<T> sugestions)
         {
             _inputProperty = targetVM.GetType().GetProperty(inputPropertyName);
             _suggestions = sugestions;

@@ -24,7 +24,7 @@ namespace LibraryWPF.DAL
             }
         }
 
-        public static IEnumerable<T> FindLastFive<T>(string modelType, string searchProperty, T searchTerm)
+        public static IEnumerable<object> FindLastFive<T>(string modelType, string searchProperty, T searchTerm)
         {
             switch (modelType)
             {

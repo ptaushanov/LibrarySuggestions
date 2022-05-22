@@ -189,6 +189,18 @@
             BorderThickness="2"
             BorderBrush="Black"
             ItemsSource="{Binding Suggestions}"
-            />
+        >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Title, StringFormat=Заглавие: {0}}" />
+                        <TextBlock Text="{Binding Category, StringFormat=Категория: {0}}" />
+                        <TextBlock Text="{Binding FirstName, StringFormat=Име: {0}}" />
+                        <TextBlock Text="{Binding LastName, StringFormat=Фамилия: {0}}" />
+                        <TextBlock Text="{Binding Publisher, StringFormat=Издател: {0}}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

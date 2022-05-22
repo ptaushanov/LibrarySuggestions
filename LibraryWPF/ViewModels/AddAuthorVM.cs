@@ -11,7 +11,7 @@ namespace LibraryWPF.ViewModels
 {
     class AddAuthorVM : DependencyObject, INotifyPropertyChanged
     {
-        private ObservableCollection<string> _suggestions;
+        private ObservableCollection<Author> _suggestions;
         private string _title;
         private string _category;
         private string _firstName;
@@ -30,7 +30,7 @@ namespace LibraryWPF.ViewModels
                 "Книга", "Списание", "Вестник", "Интервю", "Публикация"
             };
 
-            Suggestions = new ObservableCollection<string>();
+            Suggestions = new ObservableCollection<Author>();
             SaveSuggestionCommand = new RelayCommand(SaveSuggestion);
         }
 
@@ -41,7 +41,7 @@ namespace LibraryWPF.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ObservableCollection<string> Suggestions
+        public ObservableCollection<Author> Suggestions
         {
             get { return _suggestions; }
             set
@@ -57,8 +57,8 @@ namespace LibraryWPF.ViewModels
             set
             {
                 _title = value;
-                EnterSuggestion.SwitchContext(this, "Title", Suggestions);
-                EnterSuggestion.Suggest(this, "Author");
+                EnterSuggestion<Author>.SwitchContext(this, "Title", Suggestions);
+                EnterSuggestion<Author>.Suggest(this);
                 PropChanged("Title");
             }
         }
@@ -107,7 +107,7 @@ namespace LibraryWPF.ViewModels
 
             try
             {
-                EnterSuggestion.SaveSuggestion(newAuthor);
+                EnterSuggestion<Author>.SaveSuggestion(newAuthor);
                 Title = "";
                 Category = "";
                 FirstName = "";
