@@ -1,6 +1,7 @@
 ﻿using LibraryWPF.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,25 +20,30 @@ namespace LibraryWPF.DAL
 
         public static IEnumerable<T> FindLastFive<T>(string searchProperty, T searchTerm)
         {
-            IEnumerable<T> result = _libraryContext.Authors
+            string stringifiedSearchTerm = searchTerm.ToString();
+
+            return _libraryContext.Authors
                 .AsEnumerable()
-                //.OrderByDescending(author => author.AuthorId)
+                .OrderByDescending(author => author.AuthorId)
                 .Take(5)
-                //.Where(author =>
-                //    author
-                //        .GetType()
-                //        .GetProperty(searchProperty)
-                //        .GetValue(author)
-                //        .Equals(searchTerm))
+                .Where(author =>
+                {
+                    object value =
+                        author
+                        .GetType()
+                        .GetProperty(searchProperty)
+                        .GetValue(author);
+
+                    return value == null ? false :
+                    ((string)value).Contains(stringifiedSearchTerm);
+                })
                 .Select(author =>
                     author
                         .GetType()
                         .GetProperty(searchProperty)
                         .GetValue(author))
-                .Cast<T>();
-
-            List<T> resultList = result.ToList();
-            return result;
+                .Cast<T>()
+                .ToList();
         }
     }
 }

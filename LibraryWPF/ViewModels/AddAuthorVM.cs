@@ -108,6 +108,11 @@ namespace LibraryWPF.ViewModels
             try
             {
                 EnterSuggestion.SaveSuggestion(newAuthor);
+                Title = "";
+                Category = "";
+                FirstName = "";
+                LastName = "";
+                Publisher = "";
             }
             catch (Exception exception)
             {

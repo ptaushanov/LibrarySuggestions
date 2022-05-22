@@ -19,7 +19,9 @@ namespace LibraryWPF.Utils
         {
             if (model == null) { throw new Exception("Няма автор, който де се запази!"); }
 
-            foreach (PropertyInfo prop in model.GetType().GetProperties())
+            PropertyInfo[] modelProperties = model.GetType().GetProperties();
+
+            foreach (PropertyInfo prop in modelProperties)
             {
                 if (prop.PropertyType.Name.ToLower() != "string") { continue; }
                 if (
@@ -31,7 +33,6 @@ namespace LibraryWPF.Utils
                 }
             }
 
-
             ServiceRegistry.Add(model);
         }
 
@@ -42,6 +43,7 @@ namespace LibraryWPF.Utils
             string searchTerm = _inputProperty.GetValue(targetVM).ToString();
             _suggestions.Clear();
 
+            if (searchTerm.Equals(string.Empty)) { return; }
             IEnumerable<string> suggestions = ServiceRegistry.FindLastFive(modelType, searchProperty, searchTerm);
 
             suggestions
