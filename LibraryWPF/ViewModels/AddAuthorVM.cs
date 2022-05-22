@@ -12,14 +12,17 @@ namespace LibraryWPF.ViewModels
     class AddAuthorVM : DependencyObject, INotifyPropertyChanged
     {
         private ObservableCollection<Author> _suggestions;
+        private int? _id = null;
         private string _title;
         private string _category;
         private string _firstName;
         private string _lastName;
         private string _publisher;
-        private Author _currentAuthor;
 
-        public RelayCommand SaveSuggestionCommand { get; set; }
+        private Author _selectedAuthor;
+
+        public RelayCommand SaveSuggestionCommand { get; private set; }
+        public RelayCommand DeselectCommand { get; private set; }
 
         public ObservableCollection<string> Categories { get; set; }
 
@@ -32,6 +35,8 @@ namespace LibraryWPF.ViewModels
 
             Suggestions = new ObservableCollection<Author>();
             SaveSuggestionCommand = new RelayCommand(SaveSuggestion);
+            DeselectCommand = new RelayCommand(Deselect);
+            SelectedAuthor = null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -44,11 +49,13 @@ namespace LibraryWPF.ViewModels
         public ObservableCollection<Author> Suggestions
         {
             get { return _suggestions; }
-            set
-            {
-                _suggestions = value;
-                PropChanged("Suggestions");
-            }
+            set { _suggestions = value; PropChanged("Suggestions"); }
+        }
+
+        public int? Id
+        {
+            get { return _id; }
+            private set { _id = value; }
         }
 
         public string Title
@@ -57,8 +64,7 @@ namespace LibraryWPF.ViewModels
             set
             {
                 _title = value;
-                EnterSuggestion<Author>.SwitchContext(this, "Title", Suggestions);
-                EnterSuggestion<Author>.Suggest(this);
+                TrySuggestAuthor("Title");
                 PropChanged("Title");
             }
         }
@@ -72,52 +78,109 @@ namespace LibraryWPF.ViewModels
         public string FirstName
         {
             get { return _firstName; }
-            set { _firstName = value; PropChanged("FirstName"); }
+            set
+            {
+                _firstName = value;
+                TrySuggestAuthor("FirstName");
+                PropChanged("FirstName");
+            }
         }
 
         public string LastName
         {
             get { return _lastName; }
-            set { _lastName = value; PropChanged("LastName"); }
+            set
+            {
+                _lastName = value;
+                TrySuggestAuthor("LastName");
+                PropChanged("LastName");
+            }
         }
 
         public string Publisher
         {
             get { return _publisher; }
-            set { _publisher = value; PropChanged("Publisher"); }
-        }
-
-        public Author CurrentAuthor
-        {
-            get { return _currentAuthor; }
             set
             {
-                _currentAuthor = value;
-                PropChanged("Title");
-                PropChanged("Author");
-                PropChanged("FirstName");
-                PropChanged("LastName");
+                _publisher = value;
+                TrySuggestAuthor("Publisher");
                 PropChanged("Publisher");
             }
         }
 
+        public Author SelectedAuthor
+        {
+            get { return _selectedAuthor; }
+            set
+            {
+                _selectedAuthor = value;
+                PropChanged("SelectedAuthor");
+
+                if (value == null) { return; }
+
+                Id = value.AuthorId;
+                Title = value.Title;
+                Category = value.Category;
+                FirstName = value.FirstName;
+                LastName = value.LastName;
+                Publisher = value.Publisher;
+
+                PropChanged("AddEnabled");
+                PropChanged("EditEnabled");
+            }
+        }
+
+        public bool AddEnabled { get => SelectedAuthor == null; }
+        public bool EditEnabled { get => SelectedAuthor != null; }
+
+        private void TrySuggestAuthor(string propertyName)
+        {
+            if (SelectedAuthor != null) { return; }
+
+            EnterSuggestion<Author>.SwitchContext(this, propertyName, Suggestions);
+            EnterSuggestion<Author>.Suggest(this);
+        }
+
         public void SaveSuggestion()
         {
-            Author newAuthor = new Author(Title, Category, FirstName, LastName, Publisher);
+            Author newAuthor = new Author(null, Title, Category, FirstName, LastName, Publisher);
 
             try
             {
                 EnterSuggestion<Author>.SaveSuggestion(newAuthor);
-                Title = "";
-                Category = "";
-                FirstName = "";
-                LastName = "";
-                Publisher = "";
+                Deselect();
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
         }
+
+        public void EditSuggestion()
+        {
+            Author editedAuthor = new Author(null, Title, Category, FirstName, LastName, Publisher);
+            try
+            {
+                EnterSuggestion<Author>.EditSuggestion(SelectedAuthor, editedAuthor);
+                Deselect();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        public void Deselect()
+        {
+            Id = null;
+            Title = "";
+            Category = "";
+            FirstName = "";
+            LastName = "";
+            Publisher = "";
+            SelectedAuthor = null;
+            Suggestions.Clear();
+        }
     }
+
 }

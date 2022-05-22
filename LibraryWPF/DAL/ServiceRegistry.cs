@@ -24,6 +24,22 @@ namespace LibraryWPF.DAL
             }
         }
 
+        public static void Update(object oldModel, object newModel)
+        {
+            string modelType = oldModel.GetType().Name;
+            switch (modelType)
+            {
+                case "Author":
+                    Author oldAuthor = (Author)oldModel;
+                    Author newAuthor = (Author)newModel;
+
+                    AuthorService.UpdateAuthor(oldAuthor, newAuthor);
+                    break;
+                default:
+                    throw new Exception($"No service implementation for type {modelType}");
+            }
+        }
+
         public static IEnumerable<object> FindLastFive<T>(string modelType, string searchProperty, T searchTerm)
         {
             switch (modelType)

@@ -11,6 +11,9 @@
     <Window.DataContext>
         <vm:AddAuthorVM/>
     </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -166,6 +169,7 @@
                     Content="Добави"
                     Margin="10"
                     Command="{Binding SaveSuggestionCommand}"
+                    Visibility="{Binding AddEnabled, Converter={StaticResource BooleanToVisibility}}"
                 />
 
                 <Button 
@@ -176,7 +180,22 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Content="Редактирай"
+                    Command="{Binding SaveSuggestionCommand}"
                     Margin="10"
+                    Visibility="{Binding EditEnabled, Converter={StaticResource BooleanToVisibility}}"
+                />
+
+                <Button 
+                    Height="25"
+                    Width="100"
+                    Background="White"
+                    FontFamily="Cascadia Code"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    Content="Откажи"
+                    Command="{Binding DeselectCommand}"
+                    Margin="10"
+                    Visibility="{Binding EditEnabled, Converter={StaticResource BooleanToVisibility}}"
                 />
             </StackPanel>
         </Grid>
@@ -189,6 +208,7 @@
             BorderThickness="2"
             BorderBrush="Black"
             ItemsSource="{Binding Suggestions}"
+            SelectedItem="{Binding SelectedAuthor}"
         >
             <ListBox.ItemTemplate>
                 <DataTemplate>

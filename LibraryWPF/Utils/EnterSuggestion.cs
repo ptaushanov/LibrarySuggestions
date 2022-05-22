@@ -36,6 +36,27 @@ namespace LibraryWPF.Utils
             ServiceRegistry.Add(model);
         }
 
+        public static void EditSuggestion(object oldModel, object newModel)
+        {
+            if (newModel == null) { throw new Exception("Няма автор, който де се запази!"); }
+
+            PropertyInfo[] modelProperties = newModel.GetType().GetProperties();
+
+            foreach (PropertyInfo prop in modelProperties)
+            {
+                if (prop.PropertyType.Name.ToLower() != "string") { continue; }
+                if (
+                    prop.GetValue(newModel) == null ||
+                    prop.GetValue(newModel).ToString() == ""
+                )
+                {
+                    throw new Exception("Някое поле не е попълнено");
+                }
+            }
+
+            ServiceRegistry.Update(oldModel, newModel);
+        }
+
         public static void Suggest(object targetVM)
         {
             string searchProperty = _inputProperty.Name;

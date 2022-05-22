@@ -1,4 +1,6 @@
-﻿namespace LibraryWPF.Models
+﻿using System;
+
+namespace LibraryWPF.Models
 {
     public class Author
     {
@@ -20,16 +22,27 @@
         }
 
         public Author(
+            int? authorId,
             string title, string category,
             string firstName, string lastName, string publisher
         )
         {
-            AuthorId = null;
+            AuthorId = authorId;
             Title = title;
             Category = category;
             FirstName = firstName;
             LastName = lastName;
             Publisher = publisher;
+        }
+
+        public void Copy(Author newAuthor)
+        {
+            AuthorId = newAuthor.AuthorId;
+            Title = newAuthor.Title;
+            Category = newAuthor.Category;
+            FirstName = newAuthor.FirstName;
+            LastName = newAuthor.LastName;
+            Publisher = newAuthor.Publisher;
         }
     }
 }

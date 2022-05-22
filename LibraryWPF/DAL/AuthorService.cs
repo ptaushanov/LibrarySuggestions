@@ -18,6 +18,12 @@ namespace LibraryWPF.DAL
             _libraryContext.SaveChanges();
         }
 
+        public static void UpdateAuthor(Author oldAuthor, Author newAuthor)
+        {
+            oldAuthor.Copy(newAuthor);
+            _libraryContext.SaveChanges();
+        }
+
         public static IEnumerable<Author> FindLastFive<T>(string searchProperty, T searchTerm)
         {
             string stringifiedSearchTerm = searchTerm.ToString();
