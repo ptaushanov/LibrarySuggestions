@@ -15,15 +15,15 @@ namespace LibraryWPF.ViewModels
             OpenSearchWindowCommand = new RelayCommand(OpenSearchWindow);
         }
 
-        private void OpenAddWindow()
+        private void OpenAddWindow(object _)
         {
             AddAuthorView addAuthorView = new AddAuthorView();
             addAuthorView.Show();
         }
 
-        private void OpenSearchWindow()
+        private void OpenSearchWindow(object _)
         {
-            SearchBooksView searchBooksView = new SearchBooksView();
+            SearchAuthorView searchBooksView = new SearchAuthorView();
             searchBooksView.Show();
         }
     }

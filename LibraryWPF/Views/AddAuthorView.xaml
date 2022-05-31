@@ -211,6 +211,5 @@
             ItemsSource="{Binding Suggestions}"
             SelectedItem="{Binding SelectedAuthor}"
         />
-
     </Grid>
 </Window>

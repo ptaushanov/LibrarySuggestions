@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace LibraryWPF.Views
 {
     /// <summary>
-    /// Interaction logic for SearchBooksView.xaml
+    /// Interaction logic for SearchAuthorView.xaml
     /// </summary>
-    public partial class SearchBooksView : Window
+    public partial class SearchAuthorView : Window
     {
-        public SearchBooksView()
+        public SearchAuthorView()
         {
             InitializeComponent();
         }

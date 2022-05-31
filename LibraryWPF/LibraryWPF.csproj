@@ -72,11 +72,18 @@
     <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="ViewModels\AddAuthorVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
+    <Compile Include="ViewModels\SearchAuthorVM.cs" />
     <Compile Include="Views\AddAuthorView.xaml.cs">
       <DependentUpon>AddAuthorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SearchBooksView.xaml.cs">
-      <DependentUpon>SearchBooksView.xaml</DependentUpon>
+    <Compile Include="Views\SearchAuthorView.xaml.cs">
+      <DependentUpon>SearchAuthorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchAuthorControl.xaml.cs">
+      <DependentUpon>SearchAuthorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchResultsControl.xaml.cs">
+      <DependentUpon>SearchResultsControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -95,7 +102,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SearchBooksView.xaml">
+    <Page Include="Views\SearchAuthorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchAuthorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchResultsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

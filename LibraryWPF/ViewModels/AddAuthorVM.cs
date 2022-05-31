@@ -143,14 +143,14 @@ namespace LibraryWPF.ViewModels
             EnterSuggestion<Author>.Suggest(this);
         }
 
-        public void SaveSuggestion()
+        public void SaveSuggestion(object _)
         {
             Author newAuthor = new Author(null, Title, Category, FirstName, LastName, Publisher);
 
             try
             {
                 EnterSuggestion<Author>.SaveSuggestion(newAuthor);
-                Deselect();
+                Deselect(null);
             }
             catch (Exception exception)
             {
@@ -158,13 +158,13 @@ namespace LibraryWPF.ViewModels
             }
         }
 
-        public void EditSuggestion()
+        public void EditSuggestion(object _)
         {
             Author editedAuthor = new Author(null, Title, Category, FirstName, LastName, Publisher);
             try
             {
                 EnterSuggestion<Author>.EditSuggestion(SelectedAuthor, editedAuthor);
-                Deselect();
+                Deselect(null);
             }
             catch (Exception exception)
             {
@@ -172,7 +172,7 @@ namespace LibraryWPF.ViewModels
             }
         }
 
-        public void Deselect()
+        public void Deselect(object _)
         {
             Id = null;
             Title = "";
