@@ -37,7 +37,7 @@
                 <Label 
                 Grid.Row="0"
                 Grid.Column="1"
-                Content="{Binding CurrentCategory}"
+                Content="{Binding SelectedCategory}"
                 VerticalAlignment="Center"
                 FontFamily="Cascadia Code"
                 FontSize="18"

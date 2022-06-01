@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:LibraryWPF.Views"
         xmlns:vm ="clr-namespace:LibraryWPF.ViewModels" 
         mc:Ignorable="d"
-        Title="SearchAuthorView" Height="500" Width="950"
+        Title="Търсене на автор" Height="500" Width="950"
         ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
         >
     <Window.DataContext>
         <vm:SearchAuthorVM/>

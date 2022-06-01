@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:LibraryWPF.Views"
         xmlns:vm ="clr-namespace:LibraryWPF.ViewModels" 
         mc:Ignorable="d"
-        Title="AddAuthorView" Height="500" Width="900"
-        ResizeMode="CanMinimize">
+        Title="Въвеждане или редактиране на автор" Height="500" Width="900"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        >
     <Window.DataContext>
         <vm:AddAuthorVM/>
     </Window.DataContext>

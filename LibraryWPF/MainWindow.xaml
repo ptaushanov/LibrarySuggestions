@@ -7,7 +7,9 @@
         xmlns:vm="clr-namespace:LibraryWPF.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="500"
-        ResizeMode="CanMinimize">
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        >
     <Window.DataContext>
         <vm:MainVM/>
     </Window.DataContext>

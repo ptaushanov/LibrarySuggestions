@@ -7,6 +7,117 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock>Hello</TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Label 
+                Grid.Row="0"
+                Grid.Column="1"
+                Content="Търсене"
+                VerticalAlignment="Bottom"
+                FontFamily="Cascadia Code"
+                FontSize="18"
+                Margin="30 10 5 10"
+            />
+
+        <Label 
+                Grid.Row="1"
+                Grid.Column="1"
+                Content="Заглавие"
+                VerticalAlignment="Center"
+                FontFamily="Cascadia Code"
+                FontSize="14"
+                Margin="30 10 5 10"
+            />
+
+        <TextBox 
+                Grid.Row="1"
+                Grid.Column="2"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Height="25"
+                Width="200"
+                HorizontalAlignment="Left"
+                Margin="10 0 0 0"
+                Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
+            />
+
+        <Label 
+                Grid.Row="2"
+                Grid.Column="1"
+                Content="Име"
+                VerticalAlignment="Center"
+                FontFamily="Cascadia Code"
+                FontSize="14"
+                Margin="30 10 5 10"
+            />
+
+        <TextBox 
+                Grid.Row="2"
+                Grid.Column="2"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Height="25"
+                Width="200"
+                HorizontalAlignment="Left"
+                Margin="10 0 0 0"
+                Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"
+            />
+
+        <Label 
+                Grid.Row="3"
+                Grid.Column="1"
+                Content="Фамилия"
+                VerticalAlignment="Center"
+                FontFamily="Cascadia Code"
+                FontSize="14"
+                Margin="30 10 5 10"
+            />
+
+        <TextBox 
+                Grid.Row="3"
+                Grid.Column="2"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Height="25"
+                Width="200"
+                HorizontalAlignment="Left"
+                Margin="10 0 0 0"
+                Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"
+            />
+
+        <Label 
+                Grid.Row="4"
+                Grid.Column="1"
+                Content="Издател"
+                VerticalAlignment="Center"
+                FontFamily="Cascadia Code"
+                FontSize="14"
+                Margin="30 10 5 10"
+            />
+
+        <TextBox 
+                Grid.Row="4"
+                Grid.Column="2"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Height="25"
+                Width="200"
+                HorizontalAlignment="Left"
+                Margin="10 0 0 0"
+                Text="{Binding Publisher, UpdateSourceTrigger=PropertyChanged}"
+            />
     </Grid>
 </UserControl>
