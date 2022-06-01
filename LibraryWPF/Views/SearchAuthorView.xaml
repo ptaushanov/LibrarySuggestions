@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LibraryWPF.Views"
         xmlns:vm ="clr-namespace:LibraryWPF.ViewModels" 
         mc:Ignorable="d"
-        Title="SearchAuthorView" Height="500" Width="900"
+        Title="SearchAuthorView" Height="500" Width="950"
         ResizeMode="CanMinimize"
         >
     <Window.DataContext>
@@ -25,12 +25,23 @@
             BorderBrush="Black" 
             BorderThickness="0 0 2 0"
         >
-            <StackPanel 
+            <Grid 
             Grid.Column="0"
             Grid.Row="0"
-            Background="#F9F9F9"    
         >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+
+                </Grid.RowDefinitions>
                 <Button
+                    Grid.Row="1"
                 Content="Търсене"
                 FontFamily="Cascadia Code" 
                 FontSize="14"
@@ -38,10 +49,11 @@
                 Background="Transparent"
                 BorderThickness="2"
                 BorderBrush="Black"
-                Margin="20 20 20 0"
+                Margin="20 0 20 0"
                 Command="{Binding ChangeToSearchControlCommand}"
             />
                 <Button
+                    Grid.Row="2"
                 Content="Книги"
                 FontFamily="Cascadia Code" 
                 FontSize="14"
@@ -54,6 +66,7 @@
                 CommandParameter="Книги"
             />
                 <Button
+                    Grid.Row="3"
                 Content="Списания"
                 FontFamily="Cascadia Code" 
                 FontSize="14"
@@ -66,6 +79,7 @@
                 CommandParameter="Списания"
             />
                 <Button
+                    Grid.Row="4"
                 Content="Вестници"
                 FontFamily="Cascadia Code" 
                 FontSize="14"
@@ -78,6 +92,7 @@
                 CommandParameter="Вестници"
             />
                 <Button
+                    Grid.Row="5"
                 Content="Интервюта"
                 FontFamily="Cascadia Code" 
                 FontSize="14"
@@ -90,6 +105,7 @@
                 CommandParameter="Интервюта"
                 />
                 <Button
+                    Grid.Row="6"
                 Content="Публикации"
                 FontFamily="Cascadia Code" 
                 FontSize="14"
@@ -101,7 +117,7 @@
                 Command="{Binding ChangeToResultsControlCommand}"
                 CommandParameter="Публикации"
             />
-            </StackPanel>
+            </Grid>
         </Border>
         <ContentControl Content="{Binding CurrentControl}" Grid.Row="0" Grid.Column="1"/>
     </Grid>

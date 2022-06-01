@@ -167,7 +167,8 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Content="Добави"
-                    Margin="10"
+                    Margin="10 10 20 10"
+                    
                     Command="{Binding SaveSuggestionCommand}"
                     Visibility="{Binding AddEnabled, Converter={StaticResource BooleanToVisibility}}"
                 />
@@ -194,7 +195,7 @@
                     BorderThickness="2"
                     Content="Откажи"
                     Command="{Binding DeselectCommand}"
-                    Margin="10"
+                    Margin="10 10 20 10"
                     Visibility="{Binding EditEnabled, Converter={StaticResource BooleanToVisibility}}"
                 />
             </StackPanel>
@@ -203,13 +204,13 @@
         <DataGrid 
             Grid.Row="1"
             Grid.Column="1"
-            Width="400"
-            Height="200"
-            Margin="10 -40 10 10"
+            Height="250"
+            Margin="0 -40 20 0"
             BorderThickness="2"
             BorderBrush="Black"
             ItemsSource="{Binding Suggestions}"
             SelectedItem="{Binding SelectedAuthor}"
+            IsReadOnly="True"
         />
     </Grid>
 </Window>

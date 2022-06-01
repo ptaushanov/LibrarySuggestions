@@ -9,7 +9,143 @@
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=vm:SearchAuthorVM}"
              >
-    <Grid>
-        <TextBlock Text="{Binding CurrentCategory}"/>
-    </Grid>
+    <Border Padding="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Label 
+                Grid.Row="0"
+                Grid.Column="1"
+                Content="{Binding CurrentCategory}"
+                VerticalAlignment="Center"
+                FontFamily="Cascadia Code"
+                FontSize="18"
+                Margin="5 0 0 0"
+            />
+
+                <Label 
+                Grid.Row="1"
+                Grid.Column="0"
+                Content="Заглавие"
+                VerticalAlignment="Center"
+                FontFamily="Cascadia Code"
+                FontSize="14"
+                Margin="30 10 5 10"
+            />
+
+                <TextBox 
+                Grid.Row="1"
+                Grid.Column="1"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Height="25"
+                Width="200"
+                HorizontalAlignment="Left"
+                Margin="10 0 0 0"
+                Text="{Binding Title}"
+                IsReadOnly="True"
+            />
+
+                <Label 
+                Grid.Row="2"
+                Grid.Column="0"
+                Content="Име"
+                VerticalAlignment="Center"
+                FontFamily="Cascadia Code"
+                FontSize="14"
+                Margin="30 10 5 10"
+            />
+
+                <TextBox 
+                Grid.Row="2"
+                Grid.Column="1"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Height="25"
+                Width="200"
+                HorizontalAlignment="Left"
+                Margin="10 0 0 0"
+                Text="{Binding FirstName}"
+                IsReadOnly="True"
+            />
+
+                <Label 
+                Grid.Row="3"
+                Grid.Column="0"
+                Content="Фамилия"
+                VerticalAlignment="Center"
+                FontFamily="Cascadia Code"
+                FontSize="14"
+                Margin="30 10 5 10"
+            />
+
+                <TextBox 
+                Grid.Row="3"
+                Grid.Column="1"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Height="25"
+                Width="200"
+                HorizontalAlignment="Left"
+                Margin="10 0 0 0"
+                Text="{Binding LastName}"
+                IsReadOnly="True"
+            />
+
+                <Label 
+                Grid.Row="4"
+                Grid.Column="0"
+                Content="Издател"
+                VerticalAlignment="Center"
+                FontFamily="Cascadia Code"
+                FontSize="14"
+                Margin="30 10 5 10"
+            />
+
+                <TextBox 
+                Grid.Row="4"
+                Grid.Column="1"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Height="25"
+                Width="200"
+                HorizontalAlignment="Left"
+                Margin="10 0 0 0"
+                Text="{Binding Publisher}"
+                IsReadOnly="True"
+            />
+            </Grid>
+
+            <DataGrid
+                Grid.Column="1"
+                Grid.Row="0"
+                Height="250"
+                Margin="20 -40 20 0"
+                BorderThickness="2"
+                BorderBrush="Black"
+                IsReadOnly="True"
+                />
+        </Grid>
+    </Border>
 </UserControl>
