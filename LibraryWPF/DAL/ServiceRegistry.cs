@@ -17,23 +17,7 @@ namespace LibraryWPF.DAL
             {
                 case "Author":
                     Author author = (Author)model;
-                    AuthorService.AddAuthor(author);
-                    break;
-                default:
-                    throw new Exception($"No service implementation for type {modelType}");
-            }
-        }
-
-        public static void Update(object oldModel, object newModel)
-        {
-            string modelType = oldModel.GetType().Name;
-            switch (modelType)
-            {
-                case "Author":
-                    Author oldAuthor = (Author)oldModel;
-                    Author newAuthor = (Author)newModel;
-
-                    AuthorService.UpdateAuthor(oldAuthor, newAuthor);
+                    AuthorService.SaveAuthorSuggestion(author);
                     break;
                 default:
                     throw new Exception($"No service implementation for type {modelType}");
@@ -45,7 +29,7 @@ namespace LibraryWPF.DAL
             switch (modelType)
             {
                 case "Author":
-                    return AuthorService.FindLastFive(searchProperty, searchTerm);
+                    return AuthorService.FindAuthorSuggestions(searchProperty, searchTerm);
                 default:
                     throw new Exception($"No service implementation for type {modelType}");
             }
