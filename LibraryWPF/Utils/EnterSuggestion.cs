@@ -17,7 +17,7 @@ namespace LibraryWPF.Utils
 
         public static void SaveSuggestion(object model)
         {
-            if (model == null) { throw new Exception("Няма автор, който де се запази!"); }
+            if (model == null) { throw new ArgumentNullException(); }
 
             PropertyInfo[] modelProperties = model.GetType().GetProperties();
 
@@ -38,7 +38,7 @@ namespace LibraryWPF.Utils
 
         public static void EditSuggestion(object oldModel, object newModel)
         {
-            if (newModel == null) { throw new Exception("Няма автор, който де се запази!"); }
+            if (newModel == null) { throw new ArgumentNullException(); }
 
             PropertyInfo[] modelProperties = newModel.GetType().GetProperties();
 
