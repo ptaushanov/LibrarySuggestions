@@ -70,6 +70,7 @@
     <Compile Include="Models\Author.cs" />
     <Compile Include="Utils\EnterSuggestion.cs" />
     <Compile Include="Utils\RelayCommand.cs" />
+    <Compile Include="Utils\SuggestionsIOHelper.cs" />
     <Compile Include="ViewModels\AddAuthorVM.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\SearchAuthorVM.cs" />
@@ -142,9 +143,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

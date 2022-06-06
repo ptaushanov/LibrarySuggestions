@@ -14,28 +14,35 @@ namespace LibraryWPF.Utils
 
         public static string EncodeSuggestion(object model)
         {
+
             PropertyInfo[] modelProperies = model.GetType().GetProperties();
             string[] values = modelProperies
+                .Where(property => property.Name != model.GetType().Name + "Id")
                 .Select(property =>
                     property
                         .GetValue(model)
                         .ToString()
                 ).ToArray();
 
-            return String.Join(EncodeDecodeDelimiter, values);
+            return string.Join(EncodeDecodeDelimiter, values);
         }
 
         public static T DecodeSuggestion<T>(string encodedSuggestion)
         {
-            IEnumerable<string> propertyValues =
-                encodedSuggestion
+            IEnumerable<string> propertyValues = encodedSuggestion
                 .Split(new string[] { EncodeDecodeDelimiter }, StringSplitOptions.None);
 
-            T resultModel = default;
+            T resultModel = (T)Activator.CreateInstance(typeof(T));
+            List<PropertyInfo> modelProperies = typeof(T)
+                .GetProperties()
+                .ToList();
 
-            PropertyInfo[] modelProperies = resultModel.GetType().GetProperties();
+            modelProperies.RemoveAll(property => property.Name == typeof(T).Name + "Id");
 
-            if (propertyValues.Count() != modelProperies.Count())
+            int valuesCount = propertyValues.Count();
+            int propertiesCount = modelProperies.Count();
+
+            if (valuesCount != propertiesCount)
                 throw new Exception("Открита е грешка при декодиране");
 
             for (int i = 0; i < modelProperies.Count(); i++)
@@ -49,7 +56,11 @@ namespace LibraryWPF.Utils
 
         public static void SaveSuggestionToFile(string encodedSuggestion)
         {
-            IEnumerable<string> lines = File.ReadAllLines(SuggestionsPath);
+            IEnumerable<string> lines;
+
+            if (File.Exists(SuggestionsPath))
+                lines = File.ReadAllLines(SuggestionsPath);
+            else lines = Array.Empty<string>();
 
             string[] updatedSuggestions = lines
                 .Append(encodedSuggestion)
@@ -63,6 +74,7 @@ namespace LibraryWPF.Utils
 
         public static string[] LoadSuggestionsFromFile()
         {
+            if (!File.Exists(SuggestionsPath)) { return Array.Empty<string>(); }
             return File.ReadAllLines(SuggestionsPath);
         }
     }

@@ -4,14 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryWPF.DAL
 {
     public class AuthorService
     {
-        // private static readonly LibraryContext _libraryContext = new LibraryContext();
+        //private static readonly LibraryContext _libraryContext = new LibraryContext();
 
         public static void SaveAuthorSuggestion(Author author)
         {
@@ -25,8 +23,9 @@ namespace LibraryWPF.DAL
 
             return SuggestionsIOHelper
                 .LoadSuggestionsFromFile()
-                .Select(SuggestionsIOHelper.DecodeSuggestion<Author>)
-                .Where(author =>
+                .Select(encodedSuggestion =>
+                    SuggestionsIOHelper.DecodeSuggestion<Author>(encodedSuggestion)
+                ).Where(author =>
                     author
                     .GetType()
                     .GetProperty(searchProperty)

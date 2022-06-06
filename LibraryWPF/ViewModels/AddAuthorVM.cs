@@ -20,8 +20,6 @@ namespace LibraryWPF.ViewModels
         private Author _selectedAuthor;
 
         public RelayCommand SaveSuggestionCommand { get; private set; }
-        public RelayCommand EditSuggestionCommand { get; private set; }
-        public RelayCommand DeselectCommand { get; private set; }
 
         public ObservableCollection<string> Categories { get; set; }
 
@@ -34,8 +32,6 @@ namespace LibraryWPF.ViewModels
 
             Suggestions = new ObservableCollection<Author>();
             SaveSuggestionCommand = new RelayCommand(SaveSuggestion);
-            DeselectCommand = new RelayCommand(Deselect);
-            EditSuggestionCommand = new RelayCommand(EditSuggestion);
             SelectedAuthor = null;
         }
 
@@ -130,9 +126,6 @@ namespace LibraryWPF.ViewModels
             }
         }
 
-        public bool AddEnabled { get => SelectedAuthor == null; }
-        public bool EditEnabled { get => SelectedAuthor != null; }
-
         private void TrySuggestAuthor(string propertyName)
         {
             if (SelectedAuthor != null) { return; }
@@ -148,41 +141,11 @@ namespace LibraryWPF.ViewModels
             try
             {
                 EnterSuggestion<Author>.SaveSuggestion(newAuthor);
-                Deselect(null);
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
-        }
-
-        public void EditSuggestion(object _)
-        {
-            Author editedAuthor = new Author(null, Title, Category, FirstName, LastName, Publisher);
-            try
-            {
-                EnterSuggestion<Author>.EditSuggestion(SelectedAuthor, editedAuthor);
-                Deselect(null);
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-        }
-
-        public void Deselect(object _)
-        {
-            Id = null;
-            Title = "";
-            Category = "";
-            FirstName = "";
-            LastName = "";
-            Publisher = "";
-            SelectedAuthor = null;
-            Suggestions.Clear();
-
-            PropChanged("AddEnabled");
-            PropChanged("EditEnabled");
         }
     }
 
