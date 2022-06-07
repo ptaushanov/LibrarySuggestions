@@ -63,11 +63,16 @@ namespace LibraryWPF.Utils
             else lines = Array.Empty<string>();
 
             string[] updatedSuggestions = lines
+                .Where(line => !string.IsNullOrEmpty(line))
                 .Append(encodedSuggestion)
                 .ToArray();
 
             if (updatedSuggestions.Length > HistoryAmount)
-                updatedSuggestions.Skip(1);
+            {
+                updatedSuggestions = updatedSuggestions
+                    .Skip(1)
+                    .ToArray();
+            }
 
             File.WriteAllLines(SuggestionsPath, updatedSuggestions);
         }
