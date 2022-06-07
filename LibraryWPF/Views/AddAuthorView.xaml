@@ -6,20 +6,17 @@
         xmlns:local="clr-namespace:LibraryWPF.Views"
         xmlns:vm ="clr-namespace:LibraryWPF.ViewModels" 
         mc:Ignorable="d"
-        Title="Въвеждане или редактиране на автор" Height="500" Width="900"
+        Title="Въвеждане или редактиране на автор" Height="500" Width="800"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         >
     <Window.DataContext>
         <vm:AddAuthorVM/>
     </Window.DataContext>
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition  Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -27,6 +24,8 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -43,7 +42,7 @@
 
             <Label 
                 Grid.Row="1"
-                Grid.Column="0"
+                Grid.Column="1"
                 Content="Заглавие"
                 VerticalAlignment="Center"
                 FontFamily="Cascadia Code"
@@ -53,7 +52,7 @@
 
             <TextBox 
                 Grid.Row="1"
-                Grid.Column="1"
+                Grid.Column="2"
                 BorderBrush="Black"
                 BorderThickness="2"
                 Height="25"
@@ -65,7 +64,7 @@
 
             <Label 
                 Grid.Row="2"
-                Grid.Column="0"
+                Grid.Column="1"
                 Content="Категория"
                 VerticalAlignment="Center"
                 FontFamily="Cascadia Code"
@@ -75,7 +74,7 @@
 
             <ComboBox 
                 Grid.Row="2"
-                Grid.Column="1"
+                Grid.Column="2"
                 Height="25"
                 Width="200"
                 HorizontalAlignment="Left"
@@ -89,7 +88,7 @@
 
             <Label 
                 Grid.Row="3"
-                Grid.Column="0"
+                Grid.Column="1"
                 Content="Име"
                 VerticalAlignment="Center"
                 FontFamily="Cascadia Code"
@@ -99,7 +98,7 @@
 
             <TextBox 
                 Grid.Row="3"
-                Grid.Column="1"
+                Grid.Column="2"
                 BorderBrush="Black"
                 BorderThickness="2"
                 Height="25"
@@ -111,7 +110,7 @@
 
             <Label 
                 Grid.Row="4"
-                Grid.Column="0"
+                Grid.Column="1"
                 Content="Фамилия"
                 VerticalAlignment="Center"
                 FontFamily="Cascadia Code"
@@ -121,7 +120,7 @@
 
             <TextBox 
                 Grid.Row="4"
-                Grid.Column="1"
+                Grid.Column="2"
                 BorderBrush="Black"
                 BorderThickness="2"
                 Height="25"
@@ -133,7 +132,7 @@
 
             <Label 
                 Grid.Row="5"
-                Grid.Column="0"
+                Grid.Column="1"
                 Content="Издател"
                 VerticalAlignment="Center"
                 FontFamily="Cascadia Code"
@@ -143,7 +142,7 @@
 
             <TextBox 
                 Grid.Row="5"
-                Grid.Column="1"
+                Grid.Column="2"
                 BorderBrush="Black"
                 BorderThickness="2"
                 Height="25"
@@ -154,12 +153,11 @@
             />
 
             <StackPanel
-                Grid.Column="1"
+                Grid.Column="2"
                 Grid.Row="6"
                 FlowDirection="LeftToRight"
                 Orientation="Horizontal"
                 HorizontalAlignment="Right"
-                
             >
                 <Button 
                     Height="25"
@@ -169,23 +167,111 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Content="Добави"
-                    Margin="10 10 20 10"
                     
                     Command="{Binding SaveSuggestionCommand}"
                 />
             </StackPanel>
         </Grid>
 
-        <DataGrid 
+        <ListBox
             Grid.Row="1"
             Grid.Column="1"
-            Height="250"
-            Margin="0 -40 20 0"
-            BorderThickness="2"
+            HorizontalAlignment="Right"
+            BorderThickness="2 0 0 0"
             BorderBrush="Black"
             ItemsSource="{Binding Suggestions}"
             SelectedItem="{Binding SelectedAuthor}"
-            IsReadOnly="True"
-        />
+            >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel 
+                        Orientation="Vertical"
+                        Margin="10"
+                    >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock 
+                                VerticalAlignment="Center"
+                                Text="Заглавие:" 
+                                FontFamily="Cascadia Code" 
+                                FontWeight="Bold"
+                                Margin="0 2 6 2"
+                            />
+                            <TextBlock 
+                                Text="{Binding Title}" 
+                                TextWrapping="Wrap"
+                                FontFamily="Cascadia Code"
+                                Margin="0 2 0 2"
+                                Width="100"
+                            />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock 
+                                VerticalAlignment="Center"
+                                Text="Категория:" 
+                                FontFamily="Cascadia Code" 
+                                FontWeight="Bold"
+                                Margin="0 2 6 2"
+                            />
+                            <TextBlock 
+                                Text="{Binding Category}" 
+                                TextWrapping="Wrap"
+                                FontFamily="Cascadia Code"
+                                Margin="0 2 0 2"
+                                Width="100"
+                            />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock 
+                                VerticalAlignment="Center"
+                                Text="Име:" 
+                                FontFamily="Cascadia Code" 
+                                FontWeight="Bold"
+                                Margin="0 2 6 2"
+                            />
+                            <TextBlock 
+                                Text="{Binding FirstName}" 
+                                TextWrapping="Wrap"
+                                FontFamily="Cascadia Code"
+                                Margin="0 2 0 2"
+                                Width="100"
+                                
+                            />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock 
+                                VerticalAlignment="Center"
+                                Text="Фамилия:" 
+                                FontFamily="Cascadia Code" 
+                                FontWeight="Bold"
+                                Margin="0 2 6 2"
+                            />
+                            <TextBlock 
+                                Text="{Binding LastName}" 
+                                TextWrapping="Wrap"
+                                FontFamily="Cascadia Code"
+                                Margin="0 2 0 2"
+                                Width="100"
+                            />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock 
+                                VerticalAlignment="Center"
+                                Text="Издател:" 
+                                FontFamily="Cascadia Code" 
+                                FontWeight="Bold"
+                                Margin="0 2 6 2"
+                            />
+                            <TextBlock 
+                                Text="{Binding Publisher}" 
+                                TextWrapping="Wrap"
+                                FontFamily="Cascadia Code"
+                                Margin="0 2 0 2"
+                                Width="100"
+                            />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

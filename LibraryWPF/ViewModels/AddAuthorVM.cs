@@ -10,7 +10,6 @@ namespace LibraryWPF.ViewModels
     class AddAuthorVM : DependencyObject, INotifyPropertyChanged
     {
         private ObservableCollection<Author> _suggestions;
-        private int? _id = null;
         private string _title;
         private string _category;
         private string _firstName;
@@ -46,12 +45,6 @@ namespace LibraryWPF.ViewModels
         {
             get { return _suggestions; }
             set { _suggestions = value; PropChanged("Suggestions"); }
-        }
-
-        public int? Id
-        {
-            get { return _id; }
-            private set { _id = value; }
         }
 
         public string Title
@@ -114,21 +107,17 @@ namespace LibraryWPF.ViewModels
 
                 if (value == null) { return; }
 
-                Id = value.AuthorId;
                 Title = value.Title;
                 Category = value.Category;
                 FirstName = value.FirstName;
                 LastName = value.LastName;
                 Publisher = value.Publisher;
-
-                PropChanged("AddEnabled");
-                PropChanged("EditEnabled");
             }
         }
 
         private void TrySuggestAuthor(string propertyName)
         {
-            if (SelectedAuthor != null) { return; }
+            // if (SelectedAuthor != null) { return; }
 
             EnterSuggestion<Author>.SwitchContext(this, propertyName, Suggestions);
             EnterSuggestion<Author>.Suggest(this);
@@ -141,7 +130,7 @@ namespace LibraryWPF.ViewModels
             try
             {
                 EnterSuggestion<Author>.SaveSuggestion(newAuthor);
-                Deselect(null);
+                ClearFields(null);
             }
             catch (Exception exception)
             {
@@ -149,19 +138,15 @@ namespace LibraryWPF.ViewModels
             }
         }
 
-        public void Deselect(object _)
+        public void ClearFields(object _)
         {
-            Id = null;
             Title = "";
             Category = "";
             FirstName = "";
             LastName = "";
             Publisher = "";
-            SelectedAuthor = null;
             Suggestions.Clear();
-
-            PropChanged("AddEnabled");
-            PropChanged("EditEnabled");
+            SelectedAuthor = null;
         }
     }
 

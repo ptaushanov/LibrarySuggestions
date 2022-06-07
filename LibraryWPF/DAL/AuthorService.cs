@@ -9,12 +9,15 @@ namespace LibraryWPF.DAL
 {
     public class AuthorService
     {
-        //private static readonly LibraryContext _libraryContext = new LibraryContext();
+        private static readonly LibraryContext _libraryContext = new LibraryContext();
 
         public static void SaveAuthorSuggestion(Author author)
         {
             string encodedSuggestion = SuggestionsIOHelper.EncodeSuggestion(author);
             SuggestionsIOHelper.SaveSuggestionToFile(encodedSuggestion);
+
+            _libraryContext.Authors.Add(author);
+            _libraryContext.SaveChanges();
         }
 
         public static IEnumerable<Author> FindAuthorSuggestions<T>(string searchProperty, T searchTerm)
