@@ -141,11 +141,27 @@ namespace LibraryWPF.ViewModels
             try
             {
                 EnterSuggestion<Author>.SaveSuggestion(newAuthor);
+                Deselect(null);
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
+        }
+
+        public void Deselect(object _)
+        {
+            Id = null;
+            Title = "";
+            Category = "";
+            FirstName = "";
+            LastName = "";
+            Publisher = "";
+            SelectedAuthor = null;
+            Suggestions.Clear();
+
+            PropChanged("AddEnabled");
+            PropChanged("EditEnabled");
         }
     }
 
