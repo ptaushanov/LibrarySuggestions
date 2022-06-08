@@ -27,16 +27,18 @@ namespace LibraryWPF.ViewModels
 
         public RelayCommand ChangeToSearchControlCommand { get; private set; }
         public RelayCommand ChangeToResultsControlCommand { get; private set; }
+        public RelayCommand FocusChangedCommand { get; private set; }
 
         public SearchAuthorVM()
         {
             ChangeToSearchControlCommand = new RelayCommand(ChangeToSearchControl);
             ChangeToResultsControlCommand = new RelayCommand(ChangeToResultsControl);
+            FocusChangedCommand = new RelayCommand(FocusChanged);
             CurrentControl = new SearchAuthorControl();
 
             Suggestions = new ObservableCollection<string>();
             SelectedAuthor = null;
-
+            SelectedTextBox = null;
         }
 
         private void PropChanged(string propertyName)
@@ -171,6 +173,7 @@ namespace LibraryWPF.ViewModels
             CurrentControl = new SearchAuthorControl();
         }
 
+
         private void ChangeToResultsControl(object category)
         {
             SelectedCategory = category as string;
@@ -194,5 +197,11 @@ namespace LibraryWPF.ViewModels
             }
             CurrentControl = new SearchResultsControl();
         }
+
+        private void FocusChanged(object textField)
+        {
+            MessageBox.Show(textField.GetType().ToString());
+        }
+
     }
 }
