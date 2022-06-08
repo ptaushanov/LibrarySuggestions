@@ -200,7 +200,7 @@ namespace LibraryWPF.ViewModels
 
         private void FocusChanged(object textField)
         {
-            MessageBox.Show(textField.GetType().ToString());
+            SelectedTextBox = textField as TextBox;
         }
 
     }
