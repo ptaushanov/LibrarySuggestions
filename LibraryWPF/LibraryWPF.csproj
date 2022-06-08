@@ -68,7 +68,7 @@
     <Compile Include="DAL\AuthorService.cs" />
     <Compile Include="DAL\ServiceRegistry.cs" />
     <Compile Include="Models\Author.cs" />
-    <Compile Include="Utils\EnterSuggestion.cs" />
+    <Compile Include="Utils\SuggestionsManager.cs" />
     <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="Utils\SuggestionsIOHelper.cs" />
     <Compile Include="ViewModels\AddAuthorVM.cs" />

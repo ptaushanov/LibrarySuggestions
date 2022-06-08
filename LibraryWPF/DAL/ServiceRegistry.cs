@@ -24,12 +24,15 @@ namespace LibraryWPF.DAL
             }
         }
 
-        public static IEnumerable<object> FindLastFive<T>(string modelType, string searchProperty, T searchTerm)
+        public static IEnumerable<object> FindLastFive<T>
+        (string modelType, string searchProperty, T searchTerm, bool propertyOnly)
         {
             switch (modelType)
             {
                 case "Author":
-                    return AuthorService.FindAuthorSuggestions(searchProperty, searchTerm);
+                    return propertyOnly ?
+                        AuthorService.FindPropertySuggestions(searchProperty, searchTerm) :
+                        AuthorService.FindAuthorSuggestions(searchProperty, searchTerm);
                 default:
                     throw new Exception($"No service implementation for type {modelType}");
             }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using LibraryWPF.Utils;
@@ -18,7 +13,7 @@ namespace LibraryWPF.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private UserControl _currentControl;
 
-        private ObservableCollection<Author> _suggestions;
+        private ObservableCollection<string> _suggestions;
         private string _title;
         private string _category;
         private string _firstName;
@@ -27,6 +22,8 @@ namespace LibraryWPF.ViewModels
 
         private Author _selectedAuthor;
         private string _selectedCategory;
+        private bool _popupOpen;
+        private TextBox _selectedTextBox;
 
         public RelayCommand ChangeToSearchControlCommand { get; private set; }
         public RelayCommand ChangeToResultsControlCommand { get; private set; }
@@ -37,8 +34,9 @@ namespace LibraryWPF.ViewModels
             ChangeToResultsControlCommand = new RelayCommand(ChangeToResultsControl);
             CurrentControl = new SearchAuthorControl();
 
-            Suggestions = new ObservableCollection<Author>();
+            Suggestions = new ObservableCollection<string>();
             SelectedAuthor = null;
+
         }
 
         private void PropChanged(string propertyName)
@@ -56,7 +54,7 @@ namespace LibraryWPF.ViewModels
             }
         }
 
-        public ObservableCollection<Author> Suggestions
+        public ObservableCollection<string> Suggestions
         {
             get { return _suggestions; }
             set { _suggestions = value; PropChanged("Suggestions"); }
@@ -71,11 +69,6 @@ namespace LibraryWPF.ViewModels
                 TrySuggestAuthor("Title");
                 PropChanged("Title");
             }
-        }
-
-        private void TrySuggestAuthor(string v)
-        {
-            // Remove
         }
 
         public string Category
@@ -142,10 +135,35 @@ namespace LibraryWPF.ViewModels
                 FirstName = value.FirstName;
                 LastName = value.LastName;
                 Publisher = value.Publisher;
-
-                PropChanged("AddEnabled");
-                PropChanged("EditEnabled");
             }
+        }
+
+        public bool PopupOpen
+        {
+            get { return _popupOpen; }
+            set
+            {
+                if (_popupOpen == value) { return; }
+                _popupOpen = value;
+                PropChanged("PopupOpen");
+            }
+        }
+
+        public TextBox SelectedTextBox
+        {
+            get { return _selectedTextBox; }
+            set
+            {
+                _selectedTextBox = value;
+                PropChanged("SelectedTextBox");
+            }
+        }
+
+        private void TrySuggestAuthor(string propertyName)
+        {
+            SuggestionsManager.SwitchContext(this, propertyName);
+            SuggestionsManager.Suggest<Author, string>(this, Suggestions, true);
+            PopupOpen = Suggestions.Count > 0;
         }
 
         private void ChangeToSearchControl(object _)

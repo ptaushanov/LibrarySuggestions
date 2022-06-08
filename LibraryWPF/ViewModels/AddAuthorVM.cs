@@ -119,8 +119,8 @@ namespace LibraryWPF.ViewModels
         {
             // if (SelectedAuthor != null) { return; }
 
-            EnterSuggestion<Author>.SwitchContext(this, propertyName, Suggestions);
-            EnterSuggestion<Author>.Suggest(this);
+            SuggestionsManager.SwitchContext(this, propertyName);
+            SuggestionsManager.Suggest<Author, Author>(this, Suggestions);
         }
 
         public void SaveSuggestion(object _)
@@ -129,7 +129,7 @@ namespace LibraryWPF.ViewModels
 
             try
             {
-                EnterSuggestion<Author>.SaveSuggestion(newAuthor);
+                SuggestionsManager.SaveSuggestion(newAuthor);
                 ClearFields(null);
             }
             catch (Exception exception)

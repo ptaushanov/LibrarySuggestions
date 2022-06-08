@@ -7,11 +7,9 @@ using LibraryWPF.DAL;
 
 namespace LibraryWPF.Utils
 {
-    public class EnterSuggestion<T>
+    public static class SuggestionsManager
     {
         private static PropertyInfo _inputProperty;
-
-        private static ObservableCollection<T> _suggestions;
 
         public static void SaveSuggestion(object model)
         {
@@ -34,30 +32,29 @@ namespace LibraryWPF.Utils
             ServiceRegistry.Add(model);
         }
 
-        public static void Suggest(object targetVM)
+        public static void Suggest<M, S>
+        (object targetVM, ObservableCollection<S> sugestions, bool searchPropertyOnly = false)
         {
             string searchProperty = _inputProperty.Name;
 
             string searchTerm = _inputProperty.GetValue(targetVM).ToString();
-            _suggestions.Clear();
+            sugestions.Clear();
 
             if (searchTerm.Equals(string.Empty)) { return; }
 
-            IEnumerable<T> suggestions =
+            IEnumerable<S> suggestions =
                 ServiceRegistry
-                .FindLastFive(typeof(T).Name, searchProperty, searchTerm)
-                .Cast<T>();
+                .FindLastFive(typeof(M).Name, searchProperty, searchTerm, searchPropertyOnly)
+                .Cast<S>();
 
             suggestions
                 .ToList()
-                .ForEach(_suggestions.Add);
+                .ForEach(sugestions.Add);
         }
 
-        public static void SwitchContext(object targetVM, string inputPropertyName,
-            ObservableCollection<T> sugestions)
+        public static void SwitchContext(object targetVM, string inputPropertyName)
         {
             _inputProperty = targetVM.GetType().GetProperty(inputPropertyName);
-            _suggestions = sugestions;
         }
     }
 }

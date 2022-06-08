@@ -1,8 +1,6 @@
 ﻿using LibraryWPF.Models;
 using LibraryWPF.Utils;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core;
 using System.Linq;
 
 namespace LibraryWPF.DAL
@@ -35,6 +33,19 @@ namespace LibraryWPF.DAL
                     .GetValue(author)
                     .ToString()
                     .Contains(stringifiedSearchTerm)
+                );
+        }
+
+        public static IEnumerable<object> FindPropertySuggestions<T>(string searchProperty, T searchTerm)
+        {
+            string stringifiedSearchTerm = searchTerm.ToString();
+
+            return FindAuthorSuggestions(searchProperty, searchTerm)
+                .Select(author =>
+                   author
+                        .GetType()
+                        .GetProperty(searchProperty)
+                        .GetValue(author)
                 );
         }
     }
