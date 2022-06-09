@@ -137,15 +137,91 @@
             />
             </Grid>
 
-            <DataGrid
+
+            <ListBox
                 Grid.Column="1"
                 Grid.Row="0"
-                Height="250"
-                Margin="20 -40 20 0"
-                BorderThickness="2"
+                HorizontalAlignment="Right"
+                BorderThickness="2 0 0 0"
                 BorderBrush="Black"
-                IsReadOnly="True"
-                />
+                ItemsSource="{Binding SearchResults}"
+                SelectedItem="{Binding SelectedAuthor}"
+            >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel 
+                        Orientation="Vertical"
+                        Margin="10"
+                    >
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock 
+                                VerticalAlignment="Center"
+                                Text="Заглавие:" 
+                                FontFamily="Cascadia Code" 
+                                FontWeight="Bold"
+                                Margin="0 2 6 2"
+                            />
+                                <TextBlock 
+                                Text="{Binding Title}" 
+                                TextWrapping="Wrap"
+                                FontFamily="Cascadia Code"
+                                Margin="0 2 0 2"
+                                Width="100"
+                            />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock 
+                                VerticalAlignment="Center"
+                                Text="Име:" 
+                                FontFamily="Cascadia Code" 
+                                FontWeight="Bold"
+                                Margin="0 2 6 2"
+                            />
+                                <TextBlock 
+                                Text="{Binding FirstName}" 
+                                TextWrapping="Wrap"
+                                FontFamily="Cascadia Code"
+                                Margin="0 2 0 2"
+                                Width="100"
+                                
+                            />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock 
+                                VerticalAlignment="Center"
+                                Text="Фамилия:" 
+                                FontFamily="Cascadia Code" 
+                                FontWeight="Bold"
+                                Margin="0 2 6 2"
+                            />
+                                <TextBlock 
+                                Text="{Binding LastName}" 
+                                TextWrapping="Wrap"
+                                FontFamily="Cascadia Code"
+                                Margin="0 2 0 2"
+                                Width="100"
+                            />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock 
+                                VerticalAlignment="Center"
+                                Text="Издател:" 
+                                FontFamily="Cascadia Code" 
+                                FontWeight="Bold"
+                                Margin="0 2 6 2"
+                            />
+                                <TextBlock 
+                                Text="{Binding Publisher}" 
+                                TextWrapping="Wrap"
+                                FontFamily="Cascadia Code"
+                                Margin="0 2 0 2"
+                                Width="100"
+                            />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Border>
 </UserControl>

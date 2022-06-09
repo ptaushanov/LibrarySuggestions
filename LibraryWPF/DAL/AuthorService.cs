@@ -1,7 +1,9 @@
 ﻿using LibraryWPF.Models;
 using LibraryWPF.Utils;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 
 namespace LibraryWPF.DAL
 {
@@ -46,6 +48,19 @@ namespace LibraryWPF.DAL
                         .GetType()
                         .GetProperty(searchProperty)
                         .GetValue(author)
+                );
+        }
+
+        public static IEnumerable<Author> FindAuthors(Author sampleAuthor)
+        {
+            Debug.WriteLine(sampleAuthor.FirstName);
+            return _libraryContext
+                .Authors
+                .Where(currentAuthor =>
+                    (currentAuthor.Title == sampleAuthor.Title || string.IsNullOrEmpty(sampleAuthor.Title)) &&
+                    (currentAuthor.FirstName == sampleAuthor.FirstName || string.IsNullOrEmpty(sampleAuthor.FirstName)) &&
+                    (currentAuthor.LastName == sampleAuthor.LastName || string.IsNullOrEmpty(sampleAuthor.LastName)) &&
+                    (currentAuthor.Publisher == sampleAuthor.Publisher || string.IsNullOrEmpty(sampleAuthor.Publisher))
                 );
         }
     }

@@ -14,6 +14,7 @@ namespace LibraryWPF.ViewModels
         private UserControl _currentControl;
 
         private ObservableCollection<string> _suggestions;
+        private ObservableCollection<Author> _searchResults;
         private string _title;
         private string _category;
         private string _firstName;
@@ -28,6 +29,7 @@ namespace LibraryWPF.ViewModels
         public RelayCommand ChangeToResultsControlCommand { get; private set; }
         public RelayCommand NextListBoxSelectedIndexCommand { get; private set; }
         public RelayCommand PreviousListBoxSelectedIndexCommand { get; private set; }
+        public RelayCommand SearchCommand { get; private set; }
 
         public SearchAuthorVM()
         {
@@ -35,8 +37,10 @@ namespace LibraryWPF.ViewModels
             ChangeToResultsControlCommand = new RelayCommand(ChangeToResultsControl);
             NextListBoxSelectedIndexCommand = new RelayCommand(NextListBoxSelectedIndex);
             PreviousListBoxSelectedIndexCommand = new RelayCommand(PreviousListBoxSelectedIndex);
+            SearchCommand = new RelayCommand(Search);
             CurrentControl = new SearchAuthorControl();
             Suggestions = new ObservableCollection<string>();
+            SearchResults = new ObservableCollection<Author>();
             SelectedAuthor = null;
             CanSuggest = true;
         }
@@ -144,6 +148,16 @@ namespace LibraryWPF.ViewModels
             }
         }
 
+        public ObservableCollection<Author> SearchResults
+        {
+            get { return _searchResults; }
+            set
+            {
+                _searchResults = value;
+                PropChanged("SearchResults");
+            }
+        }
+
         public bool PopupOpen
         {
             get { return _popupOpen; }
@@ -216,5 +230,12 @@ namespace LibraryWPF.ViewModels
                 listBox.SelectedIndex = previousIndex < 0 ? listBox.Items.Count - 1 : previousIndex;
             }
         }
+
+        private void Search(object _)
+        {
+            Author sampleAuthor = new Author(null, Title, null, FirstName, LastName, Publisher);
+            SearchManager.Search<Author>(sampleAuthor, SearchResults);
+        }
+
     }
 }

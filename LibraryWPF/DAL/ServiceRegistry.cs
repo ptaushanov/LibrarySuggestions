@@ -37,5 +37,19 @@ namespace LibraryWPF.DAL
                     throw new Exception($"No service implementation for type {modelType}");
             }
         }
+
+        public static IEnumerable<object> Find(object model)
+        {
+            string modelType = model.GetType().Name;
+
+            switch (modelType)
+            {
+                case "Author":
+                    Author author = (Author)model;
+                    return AuthorService.FindAuthors(author);
+                default:
+                    throw new Exception($"No service implementation for type {modelType}");
+            }
+        }
     }
 }

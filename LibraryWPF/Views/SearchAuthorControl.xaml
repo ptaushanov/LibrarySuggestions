@@ -224,6 +224,7 @@
             Width="80"
             HorizontalAlignment="Right"
             Padding="10 3 10 3"
+            Command="{Binding SearchCommand}"
         />
         <Popup 
             Name="PopupSuggestion"
