@@ -23,6 +23,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -211,7 +212,19 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
-
+        <Button
+            Grid.Column="2"
+            Grid.Row="5"
+            FontFamily="Cascadia Code"
+            FontSize="14"
+            Background="Transparent"
+            BorderBrush="Black"
+            BorderThickness="2"
+            Content="Търси"
+            Width="80"
+            HorizontalAlignment="Right"
+            Padding="10 3 10 3"
+        />
         <Popup 
             Name="PopupSuggestion"
             IsOpen="{Binding PopupOpen}"
@@ -247,6 +260,13 @@
                             Value="true"
                         />
                     </i:EventTrigger>
+                    <i:KeyTrigger Key="Return">
+                        <i:ChangePropertyAction
+                            TargetObject="{Binding ElementName=PopupSuggestion}"
+                            PropertyName="IsOpen"
+                            Value="false"
+                        />
+                    </i:KeyTrigger>
                 </i:Interaction.Triggers>
 
                 <ListBox.ItemTemplate>
