@@ -57,11 +57,25 @@
                 HorizontalAlignment="Left"
                 Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
          >
+            <TextBox.InputBindings>
+                <KeyBinding 
+                    Key="Down"
+                    Command="{Binding NextListBoxSelectedIndexCommand}"
+                    CommandParameter="{Binding ElementName=PopupListBox}"
+                />
+                <KeyBinding 
+                    Key="Up"
+                    Command="{Binding PreviousListBoxSelectedIndexCommand}"
+                    CommandParameter="{Binding ElementName=PopupListBox}"
+                />
+            </TextBox.InputBindings>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="GotFocus">
-                    <i:InvokeCommandAction 
-                Command="{Binding FocusChangedCommand}"
-                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"/>
+                    <i:ChangePropertyAction 
+                        TargetObject="{Binding ElementName=PopupSuggestion}"
+                        PropertyName="PlacementTarget"
+                        Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"
+                        />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
@@ -87,11 +101,25 @@
                 Margin="10 0 0 0"
                 Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"
          >
+            <TextBox.InputBindings>
+                <KeyBinding 
+                    Key="Down"
+                    Command="{Binding NextListBoxSelectedIndexCommand}"
+                    CommandParameter="{Binding ElementName=PopupListBox}"
+                />
+                <KeyBinding 
+                    Key="Up"
+                    Command="{Binding PreviousListBoxSelectedIndexCommand}"
+                    CommandParameter="{Binding ElementName=PopupListBox}"
+                />
+            </TextBox.InputBindings>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="GotFocus">
-                    <i:InvokeCommandAction 
-                Command="{Binding FocusChangedCommand}"
-                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"/>
+                    <i:ChangePropertyAction 
+                        TargetObject="{Binding ElementName=PopupSuggestion}"
+                        PropertyName="PlacementTarget"
+                        Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"
+                        />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
@@ -104,7 +132,7 @@
                 FontFamily="Cascadia Code"
                 FontSize="14"
                 Margin="30 10 5 10"
-            />
+        />
 
         <TextBox 
                 Grid.Row="3"
@@ -117,11 +145,25 @@
                 Margin="10 0 0 0"
                 Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"
          >
+            <TextBox.InputBindings>
+                <KeyBinding 
+                    Key="Down"
+                    Command="{Binding NextListBoxSelectedIndexCommand}"
+                    CommandParameter="{Binding ElementName=PopupListBox}"
+                />
+                <KeyBinding 
+                    Key="Up"
+                    Command="{Binding PreviousListBoxSelectedIndexCommand}"
+                    CommandParameter="{Binding ElementName=PopupListBox}"
+                />
+            </TextBox.InputBindings>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="GotFocus">
-                    <i:InvokeCommandAction 
-                Command="{Binding FocusChangedCommand}"
-                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"/>
+                    <i:ChangePropertyAction 
+                        TargetObject="{Binding ElementName=PopupSuggestion}"
+                        PropertyName="PlacementTarget"
+                        Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"
+                        />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
@@ -147,24 +189,66 @@
                 Margin="10 0 0 0"
                 Text="{Binding Publisher, UpdateSourceTrigger=PropertyChanged}"
         >
+            <TextBox.InputBindings>
+                <KeyBinding 
+                    Key="Down"
+                    Command="{Binding NextListBoxSelectedIndexCommand}"
+                    CommandParameter="{Binding ElementName=PopupListBox}"
+                />
+                <KeyBinding 
+                    Key="Up"
+                    Command="{Binding PreviousListBoxSelectedIndexCommand}"
+                    CommandParameter="{Binding ElementName=PopupListBox}"
+                />
+            </TextBox.InputBindings>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="GotFocus">
-                    <i:InvokeCommandAction 
-                Command="{Binding FocusChangedCommand}"
-                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"/>
+                    <i:ChangePropertyAction 
+                        TargetObject="{Binding ElementName=PopupSuggestion}"
+                        PropertyName="PlacementTarget"
+                        Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}"
+                    />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
 
         <Popup 
+            Name="PopupSuggestion"
             IsOpen="{Binding PopupOpen}"
             StaysOpen="False"
-            PlacementTarget="{Binding SelectedTextBox}"
             Placement="Bottom"
             PopupAnimation="Fade"
             Width="200"
         >
-            <ListBox Width="Auto" ItemsSource="{Binding Suggestions}">
+            <ListBox 
+                Name="PopupListBox"  
+                Width="Auto" 
+                ItemsSource="{Binding Suggestions}"
+            >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:ChangePropertyAction 
+                            TargetObject="{Binding ElementName=PopupSuggestion, Path=PlacementTarget}"
+                            PropertyName="Text"
+                            Value="{Binding ElementName=PopupListBox, Path=SelectedItem}"
+                        />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="GotFocus">
+                        <i:ChangePropertyAction
+                            TargetObject="{Binding .}"
+                            PropertyName="CanSuggest"
+                            Value="false"
+                        />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="LostFocus">
+                        <i:ChangePropertyAction
+                            TargetObject="{Binding .}"
+                            PropertyName="CanSuggest"
+                            Value="true"
+                        />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding .}" TextWrapping="Wrap"  Width="180"/>
