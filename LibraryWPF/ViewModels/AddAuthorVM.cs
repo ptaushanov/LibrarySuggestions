@@ -1,7 +1,7 @@
 ﻿using LibraryWPF.Models;
 using LibraryWPF.Utils;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 
@@ -9,7 +9,7 @@ namespace LibraryWPF.ViewModels
 {
     public class AddAuthorVM : DependencyObject, INotifyPropertyChanged
     {
-        private ObservableCollection<Author> _suggestions;
+        private List<Author> _suggestions;
         private string _title;
         private string _category;
         private string _firstName;
@@ -20,16 +20,16 @@ namespace LibraryWPF.ViewModels
 
         public RelayCommand SaveSuggestionCommand { get; private set; }
 
-        public ObservableCollection<string> Categories { get; set; }
+        public List<string> Categories { get; set; }
 
         public AddAuthorVM()
         {
-            Categories = new ObservableCollection<string>()
+            Categories = new List<string>()
             {
                 "Книга", "Списание", "Вестник", "Интервю", "Публикация"
             };
 
-            Suggestions = new ObservableCollection<Author>();
+            Suggestions = new List<Author>();
             SaveSuggestionCommand = new RelayCommand(SaveSuggestion);
             SelectedAuthor = null;
         }
@@ -41,10 +41,14 @@ namespace LibraryWPF.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ObservableCollection<Author> Suggestions
+        public List<Author> Suggestions
         {
             get { return _suggestions; }
-            set { _suggestions = value; PropChanged("Suggestions"); }
+            set
+            {
+                _suggestions = value;
+                PropChanged("Suggestions");
+            }
         }
 
         public string Title
@@ -118,9 +122,7 @@ namespace LibraryWPF.ViewModels
         private void TrySuggestAuthor(string propertyName)
         {
             // if (SelectedAuthor != null) { return; }
-
-            SuggestionsManager.SwitchContext(this, propertyName);
-            SuggestionsManager.Suggest<Author, Author>(this, Suggestions);
+            Suggestions = SuggestionsManager.Suggest<Author, Author>(this, propertyName);
         }
 
         public void SaveSuggestion(object _)

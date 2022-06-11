@@ -16,7 +16,7 @@ namespace LibraryWPF.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private UserControl _currentControl;
 
-        private ObservableCollection<string> _suggestions;
+        private List<string> _suggestions;
         private string _title;
         private string _category;
         private string _firstName;
@@ -42,7 +42,7 @@ namespace LibraryWPF.ViewModels
             PreviousListBoxSelectedIndexCommand = new RelayCommand(PreviousListBoxSelectedIndex);
             SearchCommand = new RelayCommand(Search);
             CurrentControl = new SearchAuthorControl();
-            Suggestions = new ObservableCollection<string>();
+            Suggestions = new List<string>();
             SearchResults = new List<Author>();
             SelectedAuthor = null;
             CanSuggest = true;
@@ -63,7 +63,7 @@ namespace LibraryWPF.ViewModels
             }
         }
 
-        public ObservableCollection<string> Suggestions
+        public List<string> Suggestions
         {
             get { return _suggestions; }
             set { _suggestions = value; PropChanged("Suggestions"); }
@@ -170,8 +170,7 @@ namespace LibraryWPF.ViewModels
         private void TrySuggestAuthor(string propertyName)
         {
             if (!CanSuggest) { return; }
-            SuggestionsManager.SwitchContext(this, propertyName);
-            SuggestionsManager.Suggest<Author, string>(this, Suggestions, true);
+            Suggestions = SuggestionsManager.Suggest<Author, string>(this, propertyName, true);
             PopupOpen = Suggestions.Count > 0;
         }
 

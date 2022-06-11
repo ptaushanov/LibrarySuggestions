@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using LibraryWPF.DAL;
@@ -9,8 +8,6 @@ namespace LibraryWPF.Utils
 {
     public static class SuggestionsManager
     {
-        private static PropertyInfo _inputProperty;
-
         public static void SaveSuggestion(object model)
         {
             if (model == null) { throw new ArgumentNullException(); }
@@ -32,29 +29,24 @@ namespace LibraryWPF.Utils
             ServiceRegistry.Add(model);
         }
 
-        public static void Suggest<M, S>
-        (object targetVM, ObservableCollection<S> sugestions, bool searchPropertyOnly = false)
+        public static List<S> Suggest<M, S>
+        (object targetVM, string inputPropertyName, bool searchPropertyOnly = false)
         {
-            string searchProperty = _inputProperty.Name;
+            PropertyInfo searchProperty = targetVM
+                .GetType()
+                .GetProperty(inputPropertyName);
 
-            string searchTerm = _inputProperty.GetValue(targetVM).ToString();
-            sugestions.Clear();
+            string searchPropertyName = searchProperty.Name;
 
-            if (searchTerm.Equals(string.Empty)) { return; }
+            string searchTerm = searchProperty.GetValue(targetVM).ToString();
 
-            IEnumerable<S> suggestions =
-                ServiceRegistry
-                .FindLastFive(typeof(M).Name, searchProperty, searchTerm, searchPropertyOnly)
-                .Cast<S>();
+            if (searchTerm.Equals(string.Empty)) { return new List<S>(); }
 
-            suggestions
-                .ToList()
-                .ForEach(sugestions.Add);
-        }
-
-        public static void SwitchContext(object targetVM, string inputPropertyName)
-        {
-            _inputProperty = targetVM.GetType().GetProperty(inputPropertyName);
+            return
+                 ServiceRegistry
+                 .FindLastFive(typeof(M).Name, searchPropertyName, searchTerm, searchPropertyOnly)
+                 .Cast<S>()
+                 .ToList();
         }
     }
 }
