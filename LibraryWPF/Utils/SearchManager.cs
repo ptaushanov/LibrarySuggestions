@@ -7,7 +7,7 @@ namespace LibraryWPF.Utils
 {
     public static class SearchManager
     {
-        public static void Search<T>(T model, ObservableCollection<T> searchResults)
+        public static void Search<T>(T model, List<T> searchResults)
         {
             searchResults.Clear();
             IEnumerable<T> _searchResults = ServiceRegistry.Find(model).Cast<T>();

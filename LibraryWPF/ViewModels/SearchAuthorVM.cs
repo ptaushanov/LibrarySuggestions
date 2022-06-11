@@ -5,6 +5,9 @@ using LibraryWPF.Utils;
 using System.Windows.Controls;
 using LibraryWPF.Views;
 using LibraryWPF.Models;
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 
 namespace LibraryWPF.ViewModels
 {
@@ -14,7 +17,6 @@ namespace LibraryWPF.ViewModels
         private UserControl _currentControl;
 
         private ObservableCollection<string> _suggestions;
-        private ObservableCollection<Author> _searchResults;
         private string _title;
         private string _category;
         private string _firstName;
@@ -23,6 +25,7 @@ namespace LibraryWPF.ViewModels
 
         private Author _selectedAuthor;
         private string _selectedCategory;
+        private List<Author> _categoryResults;
         private bool _popupOpen;
 
         public RelayCommand ChangeToSearchControlCommand { get; private set; }
@@ -40,7 +43,7 @@ namespace LibraryWPF.ViewModels
             SearchCommand = new RelayCommand(Search);
             CurrentControl = new SearchAuthorControl();
             Suggestions = new ObservableCollection<string>();
-            SearchResults = new ObservableCollection<Author>();
+            SearchResults = new List<Author>();
             SelectedAuthor = null;
             CanSuggest = true;
         }
@@ -148,13 +151,15 @@ namespace LibraryWPF.ViewModels
             }
         }
 
-        public ObservableCollection<Author> SearchResults
+        public List<Author> SearchResults { get; private set; }
+
+        public List<Author> CategoryResults
         {
-            get { return _searchResults; }
+            get { return _categoryResults; }
             set
             {
-                _searchResults = value;
-                PropChanged("SearchResults");
+                _categoryResults = value;
+                PropChanged("CategoryResults");
             }
         }
 
@@ -205,6 +210,11 @@ namespace LibraryWPF.ViewModels
                     Category = "Публикация";
                     break;
             }
+
+            CategoryResults = SearchResults
+                ?.Where(result => result.Category == Category)
+                .ToList();
+
             CurrentControl = new SearchResultsControl();
         }
 
@@ -234,7 +244,7 @@ namespace LibraryWPF.ViewModels
         private void Search(object _)
         {
             Author sampleAuthor = new Author(null, Title, null, FirstName, LastName, Publisher);
-            SearchManager.Search<Author>(sampleAuthor, SearchResults);
+            SearchManager.Search(sampleAuthor, SearchResults);
         }
 
     }

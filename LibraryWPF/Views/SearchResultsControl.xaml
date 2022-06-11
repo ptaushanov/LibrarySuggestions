@@ -12,14 +12,14 @@
     <Border Padding="10">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Grid>
+            <Grid HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
@@ -144,7 +144,7 @@
                 HorizontalAlignment="Right"
                 BorderThickness="2 0 0 0"
                 BorderBrush="Black"
-                ItemsSource="{Binding SearchResults}"
+                ItemsSource="{Binding CategoryResults}"
                 SelectedItem="{Binding SelectedAuthor}"
             >
                 <ListBox.ItemTemplate>

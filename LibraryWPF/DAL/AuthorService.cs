@@ -1,9 +1,7 @@
 ﻿using LibraryWPF.Models;
 using LibraryWPF.Utils;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 
 namespace LibraryWPF.DAL
 {
@@ -53,7 +51,6 @@ namespace LibraryWPF.DAL
 
         public static IEnumerable<Author> FindAuthors(Author sampleAuthor)
         {
-            Debug.WriteLine(sampleAuthor.FirstName);
             return _libraryContext
                 .Authors
                 .Where(currentAuthor =>
