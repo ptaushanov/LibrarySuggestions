@@ -19,7 +19,11 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Grid HorizontalAlignment="Center">
+            <Grid 
+                Grid.Column="0" 
+                Grid.Row="0" 
+                HorizontalAlignment="Center"
+            >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
@@ -33,7 +37,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-
                 <Label 
                 Grid.Row="0"
                 Grid.Column="1"
@@ -63,7 +66,7 @@
                 Width="200"
                 HorizontalAlignment="Left"
                 Margin="10 0 0 0"
-                Text="{Binding Title}"
+                Text="{Binding SelectedAuthor.Title}"
                 IsReadOnly="True"
             />
 
@@ -86,7 +89,7 @@
                 Width="200"
                 HorizontalAlignment="Left"
                 Margin="10 0 0 0"
-                Text="{Binding FirstName}"
+                Text="{Binding SelectedAuthor.FirstName}"
                 IsReadOnly="True"
             />
 
@@ -109,7 +112,7 @@
                 Width="200"
                 HorizontalAlignment="Left"
                 Margin="10 0 0 0"
-                Text="{Binding LastName}"
+                Text="{Binding SelectedAuthor.LastName}"
                 IsReadOnly="True"
             />
 
@@ -132,7 +135,7 @@
                 Width="200"
                 HorizontalAlignment="Left"
                 Margin="10 0 0 0"
-                Text="{Binding Publisher}"
+                Text="{Binding SelectedAuthor.Publisher}"
                 IsReadOnly="True"
             />
             </Grid>

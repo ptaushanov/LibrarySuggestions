@@ -140,14 +140,6 @@ namespace LibraryWPF.ViewModels
             {
                 _selectedAuthor = value;
                 PropChanged("SelectedAuthor");
-
-                if (value == null) { return; }
-
-                Title = value.Title;
-                Category = value.Category;
-                FirstName = value.FirstName;
-                LastName = value.LastName;
-                Publisher = value.Publisher;
             }
         }
 
@@ -212,7 +204,7 @@ namespace LibraryWPF.ViewModels
             }
 
             CategoryResults = SearchResults
-                ?.Where(result => result.Category == Category)
+                .Where(result => result.Category == Category)
                 .ToList();
 
             CurrentControl = new SearchResultsControl();
