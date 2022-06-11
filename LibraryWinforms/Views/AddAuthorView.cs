@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using LibraryWinforms.Utils;
+using LibraryWPF.Models;
 
 namespace LibraryWinforms.Views
 {
@@ -54,6 +55,15 @@ namespace LibraryWinforms.Views
         private void HandleAddSuggestion(object sender, EventArgs e)
         {
             CommandExecutor.Execute(((Button)(sender)).Tag.ToString(), AddAuthorViewModel, null);
+        }
+
+        private void HandleSelectionChanged(object sender, EventArgs e)
+        {
+            var selectedRows = ((DataGridView)sender).SelectedRows;
+            if (selectedRows.Count == 0) { return; }
+
+            Author selectedAuthor = selectedRows[0].DataBoundItem as Author;
+            AddAuthorViewModel.SelectedAuthor = selectedAuthor;
         }
     }
 }
