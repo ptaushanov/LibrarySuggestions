@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace LibraryWPF.ViewModels
 {
-    class AddAuthorVM : DependencyObject, INotifyPropertyChanged
+    public class AddAuthorVM : DependencyObject, INotifyPropertyChanged
     {
         private ObservableCollection<Author> _suggestions;
         private string _title;
