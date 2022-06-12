@@ -92,6 +92,12 @@
     <Compile Include="Views\SearchAuthorControl.Designer.cs">
       <DependentUpon>SearchAuthorControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\SearchResultsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\SearchResultsControl.Designer.cs">
+      <DependentUpon>SearchResultsControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SearchAuthorControl.resx">
       <DependentUpon>SearchAuthorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SearchResultsControl.resx">
+      <DependentUpon>SearchResultsControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

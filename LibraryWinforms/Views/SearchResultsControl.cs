@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace LibraryWinforms.Views
 {
-    public partial class SearchAuthorControl : UserControl
+    public partial class SearchResultsControl : UserControl
     {
         public SearchAuthorVM SearchAuthorViewModel { get; private set; }
-        public SearchAuthorControl(SearchAuthorVM searchAuthorVM)
+        public SearchResultsControl(SearchAuthorVM searchAuthorVM)
         {
             SearchAuthorViewModel = searchAuthorVM;
             InitializeComponent();
@@ -22,7 +22,9 @@ namespace LibraryWinforms.Views
 
         private void HandleControlLoad(object sender, EventArgs e)
         {
-
+            CategoryLabel
+                .DataBindings
+                .Add(new Binding("Text", SearchAuthorViewModel, "SelectedCategory"));
         }
     }
 }
