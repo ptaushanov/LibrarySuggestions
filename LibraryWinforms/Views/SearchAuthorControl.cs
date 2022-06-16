@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,12 +19,12 @@ namespace LibraryWinforms.Views
         public SearchAuthorControl(SearchAuthorVM searchAuthorVM)
         {
             SearchAuthorViewModel = searchAuthorVM;
-            _hasSelectedSuggestion = false;
             InitializeComponent();
         }
 
         private void HandleControlLoad(object sender, EventArgs e)
         {
+
             SuggestionsListBox
                 .DataBindings
                 .Add(new Binding("DataSource", SearchAuthorViewModel, "Suggestions", true, DataSourceUpdateMode.Never));
@@ -53,8 +54,11 @@ namespace LibraryWinforms.Views
 
         private void HandleSelectedValueChanged(object sender, EventArgs e)
         {
-            _focusedTextBox.Text = (sender as ListBox).SelectedItem as string;
+            ListBox listBox = sender as ListBox;
+            if (!listBox.Focused) { return; }
+            _focusedTextBox.Text = listBox.SelectedItem as string;
             SearchAuthorViewModel.CanSuggest = false;
         }
+
     }
 }

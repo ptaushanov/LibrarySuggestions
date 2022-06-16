@@ -46,6 +46,7 @@ namespace LibraryWPF.Utils
                  ServiceRegistry
                  .FindLastFive(typeof(M).Name, searchPropertyName, searchTerm, searchPropertyOnly)
                  .Cast<S>()
+                 .ToHashSet()
                  .ToList();
         }
     }
