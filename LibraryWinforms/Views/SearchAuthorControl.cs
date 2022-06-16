@@ -49,6 +49,7 @@ namespace LibraryWinforms.Views
         private void HandleTextBoxEnter(object sender, EventArgs e)
         {
             _focusedTextBox = sender as TextBox;
+            SearchAuthorViewModel.Suggestions = new List<string>();
             SearchAuthorViewModel.CanSuggest = true;
         }
 
