@@ -44,7 +44,7 @@ namespace LibraryWPF.ViewModels
             CurrentControl = new SearchAuthorControl();
             Suggestions = new List<string>();
             SearchResults = new List<Author>();
-            SelectedAuthor = null;
+            SelectedAuthor = new Author();
             CanSuggest = true;
         }
 

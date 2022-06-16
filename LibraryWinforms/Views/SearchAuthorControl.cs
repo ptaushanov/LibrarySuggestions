@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LibraryWinforms.Utils;
 
 namespace LibraryWinforms.Views
 {
@@ -61,5 +62,10 @@ namespace LibraryWinforms.Views
             SearchAuthorViewModel.CanSuggest = false;
         }
 
+        private void HandleSearchAuthor(object sender, EventArgs e)
+        {
+            string commandName = ((Button)SearchAuthorButton).Tag.ToString();
+            CommandExecutor.Execute(commandName, SearchAuthorViewModel, null);
+        }
     }
 }
