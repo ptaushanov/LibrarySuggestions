@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibraryWPF.ViewModels;
 using LibraryWinforms.Utils;
+using LibraryWPF.Models;
 
 namespace LibraryWinforms.Views
 {
@@ -41,6 +42,7 @@ namespace LibraryWinforms.Views
         {
             UCPanel.Controls.Clear();
             UCPanel.Controls.Add(_searchResultsControl);
+            SearchAuthorViewModel.SelectedAuthor = new Author();
         }
 
         private void HandleSwitchToSearch(object sender, EventArgs e)
