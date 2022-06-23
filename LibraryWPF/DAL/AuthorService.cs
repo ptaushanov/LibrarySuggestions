@@ -57,7 +57,8 @@ namespace LibraryWPF.DAL
                     (currentAuthor.Title == sampleAuthor.Title || string.IsNullOrEmpty(sampleAuthor.Title)) &&
                     (currentAuthor.FirstName == sampleAuthor.FirstName || string.IsNullOrEmpty(sampleAuthor.FirstName)) &&
                     (currentAuthor.LastName == sampleAuthor.LastName || string.IsNullOrEmpty(sampleAuthor.LastName)) &&
-                    (currentAuthor.Publisher == sampleAuthor.Publisher || string.IsNullOrEmpty(sampleAuthor.Publisher))
+                    (currentAuthor.Publisher == sampleAuthor.Publisher || string.IsNullOrEmpty(sampleAuthor.Publisher)) &&
+                    (currentAuthor.YearOfPublication == sampleAuthor.YearOfPublication || sampleAuthor.YearOfPublication == 0)
                 );
         }
     }

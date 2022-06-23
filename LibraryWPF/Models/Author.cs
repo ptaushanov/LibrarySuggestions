@@ -11,6 +11,8 @@ namespace LibraryWPF.Models
         public string LastName { get; set; }
         public string Publisher { get; set; }
 
+        public int YearOfPublication { get; set; }
+
         public Author()
         {
             AuthorId = null;
@@ -19,12 +21,13 @@ namespace LibraryWPF.Models
             FirstName = "";
             LastName = "";
             Publisher = "";
+            YearOfPublication = 0;
         }
 
         public Author(
             int? authorId,
             string title, string category,
-            string firstName, string lastName, string publisher
+            string firstName, string lastName, string publisher, int yearOfPublication
         )
         {
             AuthorId = authorId;
@@ -33,6 +36,7 @@ namespace LibraryWPF.Models
             FirstName = firstName;
             LastName = lastName;
             Publisher = publisher;
+            YearOfPublication = yearOfPublication;
         }
 
         public void Copy(Author newAuthor)
@@ -42,6 +46,7 @@ namespace LibraryWPF.Models
             FirstName = newAuthor.FirstName;
             LastName = newAuthor.LastName;
             Publisher = newAuthor.Publisher;
+            YearOfPublication = newAuthor.YearOfPublication;
         }
     }
 }

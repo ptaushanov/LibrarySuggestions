@@ -71,6 +71,7 @@
     <Compile Include="DAL\AuthorService.cs" />
     <Compile Include="DAL\ServiceRegistry.cs" />
     <Compile Include="Models\Author.cs" />
+    <Compile Include="Utils\IntStringConverter.cs" />
     <Compile Include="Utils\SearchManager.cs" />
     <Compile Include="Utils\SuggestionsManager.cs" />
     <Compile Include="Utils\RelayCommand.cs" />

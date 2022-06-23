@@ -234,7 +234,7 @@ namespace LibraryWPF.ViewModels
 
         private void Search(object _)
         {
-            Author sampleAuthor = new Author(null, Title, null, FirstName, LastName, Publisher);
+            Author sampleAuthor = new Author(null, Title, null, FirstName, LastName, Publisher, 0);
             SearchManager.Search(sampleAuthor, SearchResults);
         }
 

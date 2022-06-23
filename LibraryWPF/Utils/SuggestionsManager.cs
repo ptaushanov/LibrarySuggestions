@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using LibraryWPF.DAL;
@@ -16,14 +17,22 @@ namespace LibraryWPF.Utils
 
             foreach (PropertyInfo prop in modelProperties)
             {
-                if (prop.PropertyType.Name.ToLower() != "string") { continue; }
-                if (
+                bool nullableValidation = prop.PropertyType.IsGenericType
+                    && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>);
+
+                if (nullableValidation) { continue; }
+
+                bool stringValidation =
+                    prop.PropertyType.Name.ToLower() == "string" &&
                     prop.GetValue(model) == null ||
-                    prop.GetValue(model).ToString() == ""
-                )
-                {
+                    prop.GetValue(model).ToString() == "";
+
+                bool intValidation =
+                    prop.PropertyType.Name.ToLower() == "int32" &&
+                    (int)prop.GetValue(model) == default;
+
+                if (stringValidation || intValidation)
                     throw new Exception("Някое поле не е попълнено");
-                }
             }
 
             ServiceRegistry.Add(model);

@@ -47,7 +47,10 @@ namespace LibraryWPF.Utils
 
             for (int i = 0; i < modelProperies.Count(); i++)
             {
-                modelProperies[i].SetValue(resultModel, propertyValues.ElementAt(i));
+                object propertyValue = Convert.ChangeType(
+                    propertyValues.ElementAt(i), modelProperies[i].PropertyType);
+
+                modelProperies[i].SetValue(resultModel, propertyValue);
             }
 
             return resultModel;

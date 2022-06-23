@@ -15,6 +15,7 @@ namespace LibraryWPF.ViewModels
         private string _firstName;
         private string _lastName;
         private string _publisher;
+        private int _yearOfPublication;
 
         private Author _selectedAuthor;
 
@@ -101,6 +102,17 @@ namespace LibraryWPF.ViewModels
             }
         }
 
+        public int YearOfPublication
+        {
+            get { return _yearOfPublication; }
+            set
+            {
+                _yearOfPublication = value;
+                TrySuggestAuthor("YearOfPublication");
+                PropChanged("YearOfPublication");
+            }
+        }
+
         public Author SelectedAuthor
         {
             get { return _selectedAuthor; }
@@ -116,6 +128,7 @@ namespace LibraryWPF.ViewModels
                 FirstName = value.FirstName;
                 LastName = value.LastName;
                 Publisher = value.Publisher;
+                YearOfPublication = value.YearOfPublication;
             }
         }
 
@@ -127,7 +140,7 @@ namespace LibraryWPF.ViewModels
 
         public void SaveSuggestion(object _)
         {
-            Author newAuthor = new Author(null, Title, Category, FirstName, LastName, Publisher);
+            Author newAuthor = new Author(null, Title, Category, FirstName, LastName, Publisher, YearOfPublication);
 
             try
             {
@@ -149,6 +162,7 @@ namespace LibraryWPF.ViewModels
             Publisher = "";
             Suggestions.Clear();
             SelectedAuthor = null;
+            YearOfPublication = 0;
         }
     }
 
