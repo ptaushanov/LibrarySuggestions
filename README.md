@@ -23,8 +23,6 @@ guide on how to setup the project.
 
 ### 📄 License
 
----
-
 This project is licensed under the Apache License - _see the_
 [LICENSE.md](https://github.com/ptaushanov/LibrarySuggestions/blob/master/LICENSE)
 _file for details._
