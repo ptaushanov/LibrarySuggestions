@@ -8,12 +8,20 @@ it can be used in both projects.
 **Note:** This solutions was used for the subject "Programming Systems" at the
 Technical University of Sofia.
 
-### 📷 Screenshots 📷
+### 📸 Screenshots 📸
+
 ![image](https://github.com/ptaushanov/LibrarySuggestions/assets/33032001/1997cc9b-de5d-4242-9409-70199fe311aa)
 
 ---
 
-### 📄 License 📄
+### 📝 Important Notes
+
+Due to whole complexity of the setup I won't be able to provide a step-by-step
+guide on how to setup the project.
+
+---
+
+### 📄 License
 
 ---
 
