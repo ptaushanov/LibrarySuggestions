@@ -16,6 +16,6 @@ Technical University of Sofia.
 
 ---
 
-This project is licensed under the MIT License - _see the_
+This project is licensed under the Apache License - _see the_
 [LICENSE.md](https://github.com/ptaushanov/LibrarySuggestions/blob/master/LICENSE)
 _file for details._
