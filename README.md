@@ -9,6 +9,7 @@ it can be used in both projects.
 Technical University of Sofia.
 
 ### 📷 Screenshots 📷
+![image](https://github.com/ptaushanov/LibrarySuggestions/assets/33032001/1997cc9b-de5d-4242-9409-70199fe311aa)
 
 ---
 
